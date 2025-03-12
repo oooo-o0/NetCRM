@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>会員管理システム</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="text-center mt-4">
+<h1>会員管理システム</h1>
+
+<!-- ログイン済みの場合に表示:start -->
+	<a class="btn btn-primary btn-lg mt-4 mr-2" href="members/list.html">会員一覧</a>
+	<a class="btn btn-primary btn-lg mt-4 ml-2" href="news/list.html">お知らせ一覧</a>
+<!-- ログイン済みの場合に表示:end -->
+
+<!-- ログインしていない場合に表示:start -->
+	<form class="mt-4" action="" method="post">
+		<span class="error">IDまたはパスワードが正しくありません。</span>
+		<p class="mt-2">ログインID：<input type="text" name="loginId"></p>
+		<p>パスワード：<input type="password" name="loginPass"></p>
+		<input class="btn btn-primary" type="submit" value="ログイン">
+	</form>
+<!-- ログインしていない場合に表示:end -->
+
+</div>
+</body>
+</html>

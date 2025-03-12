@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>[[${title}]]</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="my-4">[[${title}]]</h1>
+		<form action="" method="post" th:object="${member}">
+			<span th:errors="*{name}" class="error"></span>
+			<p class="mt-2">氏名：<input type="text" th:field="*{name}"></p>
+			<span th:errors="*{age}" class="error"></span>
+			<p class="mt-2">年齢：<input type="text" th:field="*{age}"></p>
+			<span th:errors="*{address}" class="error"></span>
+			<p class="mt-2">住所：<input type="text" th:field="*{address}"></p>
+			<p class="mt-2">会員種別：
+				<select th:field="*{type.id}">
+					<option th:each="t : ${types}" th:value="${t.id}" th:text="${t.name}"></option>
+				</select>
+			</p>
+			<input class="btn btn-primary" type="submit">
+		</form>
+		<p class="mt-4"><a th:href="@{/members}">一覧に戻る</a></p>
+	</div>
+</body>
+
+</html>

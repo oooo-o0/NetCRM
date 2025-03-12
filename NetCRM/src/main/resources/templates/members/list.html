@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head xmlns="http://www.thymeleaf.org">
+	<meta charset="UTF-8">
+	<title>会員一覧</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="mt-4">会員一覧</h1>
+
+		<!-- 操作に応じたメッセージを表示:start -->
+		<div th:if="${statusMessage}" class="alert alert-success mt-4">
+			[[${statusMessage}]]
+		</div>
+		<!-- 操作に応じたメッセージを表示:end -->
+
+		<p>
+			<a class="mt-4 btn btn-primary" th:href="@{/members/add}">会員の追加</a>
+			<a class="mt-4 ml-4 btn btn-secondary" th:href="@{/logout}">ログアウト</a>
+		</p>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>氏名</th>
+				<th>年齢</th>
+				<th>住所</th>
+				<th>会員種別</th>
+				<th>登録日</th>
+				<th colspan="2">操作</th>
+			</tr>
+			<tr th:each="member : ${members}">
+				<td>[[${member.id}]]</td>
+				<td>[[${member.name}]]</td>
+				<td>[[${member.age}]]</td>
+				<td>[[${member.address}]]</td>
+				<td>[[${member.type.name}]]</td>
+				<td th:text="${member.created != null ? #temporals.format(member.created, 'yyyy年MM月dd日') : '未登録'}"></td>
+				<td><a class="btn btn-primary" th:href="@{/members/edit/{id}(id=${member.id})}">編集</a></td>
+				<td><button class="btn btn-danger delete" th:data-href="@{/members/delete/{id}(id=${member.id})}"
+						th:data-name="${member.name}" data-bs-toggle="modal" data-bs-target="#confirm-modal">削除</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- 2ページ以上の場合、ページネーションを表示:start -->
+	<div class="container">
+		<ul class="pagination">
+			<!-- 前のページへ -->
+			<li class="page-item disabled"><a class="page-link" href="">&laquo;</a></li>
+
+			<!-- ページ番号 -->
+			<li class="page-item active"><a class="page-link" href="">1</a></li>
+			<li class="page-item"><a class="page-link" href="">2</a></li>
+			<li class="page-item"><a class="page-link" href="">3</a></li>
+
+			<!-- 次のページへ -->
+			<li class="page-item"><a class="page-link" href="">&raquo;</a></li>
+		</ul>
+	</div>
+	<!-- 2ページ以上の場合、ページネーションを表示:end -->
+
+	<!-- Bootstrap5 Modal -->
+	<div class="modal fade" id="confirm-modal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">会員情報の削除</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					「<span id="delete-name"></span>」を削除します。よろしいですか？
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-danger" id="delete-yes">はい</a>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script>
+		document
+			.querySelectorAll(".delete")
+			.forEach(btn => btn.addEventListener("click", e => {
+				const name = e.target.getAttribute("data-name");
+				document
+					.getElementById("delete-name")
+					.textContent = name;
+
+				const href = e.target.getAttribute("data-href");
+				document
+					.getElementById("delete-yes")
+					.setAttribute("href", href);
+			}));
+	</script>
+</body>
+
+</html>

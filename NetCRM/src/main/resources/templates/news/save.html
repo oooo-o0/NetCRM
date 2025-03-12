@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>お知らせの追加</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+<h1 class="my-4">お知らせの追加</h1>
+<form action="" method="post">
+	<span class="error">タイトルに関するエラーメッセージ</span>
+	<p class="mt-2">タイトル：<input type="text" name="title"></p>
+
+	<span class="error">掲載日に関するエラーメッセージ</span>
+	<p class="mt-2">掲載日：<input type="date" name="postDate"></p>
+
+	<p class="news_target">対象を限定する場合は☑：
+		<label><input type="checkbox" name="targetIdList" value="1"> 通常会員</label>　
+		<label><input type="checkbox" name="targetIdList" value="2"> プレミアム会員</label>　
+	</p>
+
+	<span class="error">内容に関するエラーメッセージ</span>
+	<p class="mt-2">内容：<br>
+	<textarea name="article" cols="40" rows="5"></textarea></p>
+
+	<span class="error">イメージ画像に関するエラーメッセージ</span>
+	<p class="mt-2">イメージ画像：<input type="file" name="upfile"></p>
+
+	<input class="btn btn-primary" type="submit">
+</form>
+<p class="mt-4"><a href="list.html">一覧に戻る</a></p>
+</div>
+</body>
+</html>

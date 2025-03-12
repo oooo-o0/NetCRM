@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.error {
+	color: #f00;
+}
+
+.news_target span {
+	display: inline-block;
+	margin-right: 1em;
+}
